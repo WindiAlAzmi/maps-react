@@ -1,0 +1,10 @@
+/* #mapid { 
+    height: 500px;
+    width: 600px;
+
+} */
+.leaflet-container {
+  width: 400px;
+  height: 500px;
+  left:200px;
+}
