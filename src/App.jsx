@@ -9,11 +9,11 @@ import SearchRegion from './pages/components/SearchRegion'
 // import MarkerCluster from './pages/components/markerCluster/MarkerCluster'
 import MarkerMain from './pages/components/markerCluster/MarkerMain'
 import MarkerMainNearestNeighboor from './pages/components/NearestNeighboor/MarkerMainNearestNeighboor'
-// import CookiesUser from './pages/components/cookiesUserAgent/cookiesUser'
+import CookiesUser from './pages/components/cookiesUserAgent/cookiesUser'
 import MultiFilter from './pages/components/multiFilter/MultiFilter'
 import Wishlist from './pages/components/wishlist/Wishlist'
 import SearchData from './pages/components/searchMechanism/SearchData'
-import TranslationComponent from './pages/components/Translation/translationComponent'
+import TranslationComponent from './pages/components/TranslationPage/TranslationComponent'
 import YoutubeEmbed from './pages/components/YoutubeEmbed/YoutubeEmbed'
 import ProductCard from './pages/components/SliderTestimoni/ProductCard'
 import WebBanerCard from './pages/components/webBaner/WebBanerCard'
@@ -38,7 +38,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/markerCluster" element={<MarkerMain />} />
         <Route path="/markerNearest" element={<MarkerMainNearestNeighboor />} />
-        {/* <Route path="/userAgent" element={<CookiesUser />} /> */}
+        <Route path="/userAgent" element={<CookiesUser />} />
         <Route path="/multiFilter" element={<MultiFilter />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/search" element={<SearchData />} />
