@@ -85,7 +85,8 @@ export default function PaymentNMW() {
   
   return (
     <div>
-      <Helmet>
+        {metaHTML.description && metaHTML.image &&
+    <Helmet>
         <title>{metaHTML.title}</title>
         <meta name="title" content={metaHTML.title} data-react-helmet="true" />
         <meta
@@ -114,6 +115,7 @@ export default function PaymentNMW() {
           data-react-helmet="true"
         />
       </Helmet>
+}
       <main>
         <div>
           <label
