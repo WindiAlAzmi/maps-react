@@ -2,8 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" href="/assets/favicon/favicon.ico" />
+    <link rel="icon" type="image/png" href="/assets/favicon/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/assets/favicon/favicon-32x32.png" sizes="32x32" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#DB0000"/>
+    <link rel="apple-touch-icon" href="/assets/icons/196.png" />
+   <link rel="manifest" href="/manifest.json" />
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
@@ -17,12 +22,53 @@
     integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
     crossorigin="" />
 
-    <title>Vite + React</title>
+    <title>maps react</title>
 
     <style></style>
   </head>
   <body>
     <div id="root"></div>
+
+    <script>
+        // To content update on service worker state change
+     function checkForPageUpdate(registration) {
+      console.log('ini registrasion di index.html');
+        // onupdatefound will fire on first time install and when serviceWorker.js file changes      
+      registration.addEventListener("updatefound", function() {
+      // To check if service worker is already installed and controlling the page or not
+      if (navigator.serviceWorker.controller) {
+        var installingSW = registration.installing;
+
+        installingSW.onstatechange = function() {
+          
+          console.log("Service Worker State :", installingSW.state);
+
+          switch(installingSW.state) {
+            case 'installed':
+              // Now new contents will be added to cache and old contents will be remove so
+              // this is perfect time to show user that page content is updated.
+             console.log('sites di update');
+              break;
+            case 'redundant':
+              throw new Error('The installing service worker became redundant.');
+          }
+        }
+      }
+    });
+      }
+
+
+      if('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./serviceWorker.js').then((reg) => {
+            console.log('Worker Registered');
+            checkForPageUpdate(reg);
+          }).catch((err) => {
+            console.log('Error in service worker registration.')
+          })
+        })
+      }
+    </script>
     <script type="module" src="/src/main.jsx"></script>
     <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script

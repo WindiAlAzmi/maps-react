@@ -57,8 +57,23 @@ const getAddressSlice = createSlice({
   name: "getAddress",
   initialState,
   reducers: {
+    getDataLocalAddress: (state) => {
+        console.log("ini offline add address");
+        let collection = JSON.parse(localStorage.getItem("userForms"));
+        if(collection){
+          state.allForms = collection;
+          console.log(state.allForms, "ini all forms");
+        }else{
+          console.log('gagal');
+        }
+    },
     addAddress: (state, action) => {
-      state.allForms.push(action.payload);
+      // state.allForms.push(action.payload);
+
+         state.allForms.push(action.payload);
+         console.log(state.allForms, 'ini all forms');
+         localStorage.setItem("userForms", JSON.stringify(state.allForms));
+      
     },
     changeAddress: (state, action) => {
       console.log(action.payload, 'ini action payloaddd');
@@ -89,6 +104,7 @@ const getAddressSlice = createSlice({
 
         state.allForms = temptData;
         console.log(temptData, 'ini data yg sudah diubah');
+        localStorage.setItem("userForms", JSON.stringify(state.allForms));
         // storeAddressInLocalStorage(state.allDataAddress);
       }else {
         console.log('berbeda idnya');
@@ -169,5 +185,6 @@ export const {
   putDistrictToLocalStorage,
   putProvinceToLocalStorage,
   putAllInOne,
+  getDataLocalAddress
 } = getAddressSlice.actions;
 export default getAddressSlice.reducer;

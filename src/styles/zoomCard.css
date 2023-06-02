@@ -1,0 +1,28 @@
+/* .swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiperZoom {
+  overflow: hidden;
+} */
+
+
+.container {
+    width: 600px;
+    height: 600px;
+}
+
+.swiper-container,
+.swiper-wrapper,
+.swiper-slide {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide img {
+    display: block;
+    margin: 0 auto;
+    width: auto;
+    height: 80%;
+}

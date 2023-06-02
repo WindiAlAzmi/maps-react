@@ -16,14 +16,19 @@ export default function AddForm() {
     const dataForms = useSelector(dataStateForms);
 
     console.log(dataForms, 'ini data forms');
+    console.log(dataMessage, 'ini data message');
 
     const getDataProvince = localStorage.getItem("province");
     const getDataDistrict = localStorage.getItem("district");
     const getDataCity = localStorage.getItem('city');
 
-    const randomId = function(length = 6) {
-      return Math.random().toString(36).substring(2, length+2);
-    };
+    // const randomId = function(length = 6) {
+    //   return Math.random().toString(36).substring(2, length+2);
+    // };
+    const randomId = function(){
+      return Math.random() * 100 + 1;
+    }
+
 
 
   const handleSubmit = (event) => {
@@ -34,7 +39,7 @@ export default function AddForm() {
 
     dispatch(
       addAddress({
-        id: randomId(1),
+        id: randomId(),
         name: name,
         telephone: number,
         district: getDataDistrict,

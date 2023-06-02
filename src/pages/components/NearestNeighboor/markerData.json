@@ -1,0 +1,29 @@
+{
+    "title":"DataMarker",
+    "data":[
+        {
+            "id":"1",
+            "name":"NMW Depok",
+            "location":"Jl. Akses UI No.34 RW.1, Kelurahan Tugu, Kecamatan Cimanggis, Kota Depok, Provinsi Jawa Barat",
+            "latitude":  -6.357411,
+            "longitude":106.857361,
+            "googleMap":"https://goo.gl/maps/9So2Y8qLwMi34DhP7?coh=178572&entry=tt"
+        },
+        {
+            "id":"2",
+            "name":"NMW Kalimalang",
+            "location":"Jl. Kyai Haji Noer Alie No.1, Kayuringin Jaya, Kota Bekasi, Provinsi Jawa Barat",
+            "latitude":  -6.249465,
+            "longitude":106.984233,
+            "googleMap":"https://goo.gl/maps/Ed8FcgxumEa66AMu7?coh=178572&entry=tt"
+        },
+              {
+            "id":"3",
+            "name":"NMW Pentogogan",
+            "location":"Jl. Petogogan II No.29 Rw.6, Kelurahan Pulo, Kecamatan Kebayoran Baru, Kota Jakarta Selatan, Provinsi DKI Jakarta",
+            "latitude": -6.2545724,
+            "longitude":106.7958495,
+            "googleMap":"https://goo.gl/maps/tFUoqKkvzMPwPg1MA?coh=178572&entry=tt"
+        }
+    ]
+}

@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom"
 import {  useDispatch, useSelector } from "react-redux"
 import {Link, useNavigate} from "react-router-dom";
-import { dataStateOneForms, selectOneData, selectDataFormsById, clearAllinOne, changeAddress } from "../../../redux/getAddressSlice"
+import {  selectDataFormsById, clearAllinOne, changeAddress } from "../../../redux/getAddressSlice"
 
 
 export default function EditForm() {
@@ -23,7 +23,8 @@ export default function EditForm() {
     const [detail, setDetail] = useState(getDataDetail?.detail);
     const [dataMessage, setDataMessage] = useState({status:false, alert:""});
 
-
+      console.log(dataMessage, 'ini data message');
+    //dari wanda :
     // const fetchData = () => {
     //    dispatch(selectOneData(postId));
     // }

@@ -39,7 +39,7 @@ export const fetchDataKota = createAsyncThunk(
         method: "get",
         url: `https://cors-anywhere.herokuapp.com/https://emsifa.github.io/api-wilayah-indonesia/api/regencies/${initialPost}.json`,
         headers: {
-          Origin: "http://corsanywhere.localhost:5176",
+          Origin: "http://corsanywhere.localhost:5177",
         },
       };
 
@@ -60,10 +60,10 @@ export const fetchData = createAsyncThunk(
   async () => {
       const config = {
         method: "get",
-        url: `https://cors-anywhere.herokuapp.com/http://www.emsifa.com/api-wilayah-indonesia/api/provinces.json`,
-        headers: {
-          Origin: "http://corsanywhere.localhost:5176",
-        },
+        url: `http://www.emsifa.com/api-wilayah-indonesia/api/provinces.json`,
+        // headers: {
+        //   Origin: "http://corsanywhere.localhost:5176",
+        // },
       };
 
 

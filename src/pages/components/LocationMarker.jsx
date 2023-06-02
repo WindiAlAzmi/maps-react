@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/prop-types */
 import  { useEffect, useMemo, useRef, useState } from "react";
 import {
   MapContainer,
@@ -12,10 +14,11 @@ const location = [-6.300641, 106.814095];
  const NOMINATIM_BASE_URL = "https://nominatim.openstreetmap.org/reverse?";
 
 
-const CurrentLocation = (props) => {
-  const { setData, currentLocation, setCurrentLocation, searchLocation, dataList, setDataList, getData} = props;
-  const markerRef = useRef(null);
+const CurrentLocation = ({ setData, currentLocation, setCurrentLocation, searchLocation, dataList, setDataList}) => {
 
+  const markerRef = useRef(null);
+  const [firstData, setFirstData] = useState(null);
+    
   console.log(dataList, 'ini data list dari getdatapai');
 
   const getDataApi = (markdrag) => {
@@ -29,12 +32,21 @@ const CurrentLocation = (props) => {
           
           console.log(result.features[0].geometry.coordinates[0], 'ini data langsung dari api');
           setDataList(result.features[0].properties);
+            setFirstData({
+              lat: result.features[0].geometry.coordinates[1],
+              lng: result.features[0].geometry.coordinates[0],
+            });
+         
+            console.log(firstData, 'ini first data dari get api pertama kali render')
           // setData({
           //   lat: result.features[0].geometry.coordinates[1],
           //   lng: result.features[0].geometry.coordinates[0],
           // });
         })
-        .catch((err) => console.log("err: ", err));
+        .catch((err) => {
+          console.log("err: ", err);
+          // alert('in catch block');
+        });
   
   }
 
@@ -66,10 +78,20 @@ const CurrentLocation = (props) => {
     const map = useMapEvents({
       locationfound(e) {
         setData(e.latlng); //masuk ke display data
-        setCurrentLocation(e.latlng); //masuk ke titik point marker
+        setCurrentLocation(e.latlng);
+        setFirstData(e.latlng); //masuk ke titik point marker
         console.log("jalankan");
       },
     });
+
+     const getCurrentLocationAgain = () => {
+       console.log("masukkk", firstData);
+      map.locate().on("locationfound", async function () {
+        map.flyTo(firstData, map.getZoom());
+      });  
+     };
+
+
 
     useEffect(() => {
       const getDataApiFetch = (data) => {
@@ -106,6 +128,7 @@ const CurrentLocation = (props) => {
           }
 
            setCurrentLocation(searchLocation);
+           setFirstData(searchLocation);
             map.setView(
               L.latLng(searchLocation?.lat, searchLocation?.lng),
               map.getZoom(),
@@ -129,57 +152,35 @@ const CurrentLocation = (props) => {
 
 
 
-// const requestOptions = {
-//   method: "GET",
-// };
-
-
-//  const getMyLocation = () => {
-//    if (navigator.geolocation) {
-//      navigator.geolocation.getCurrentPosition(
-//        (position) => {
-//          fetch(
-//            `${NOMINATIM_BASE_URL}format=geojson&lat=${position.coords.latitude}&lon=${position.coords.longitude}`,
-//            requestOptions
-//          )
-//            .then((response) => response.json())
-//            .then((result) => {
-//              console.log(
-//                result.features[0].properties,
-//                "ini data langsung dari api"
-//              );
-
-//              setDataList(result.features[0].properties);
-//              setData({
-//                lat: position.coords.latitude,
-//                lng: position.coords.longitude,
-//              });
-//              setCurrentLocation({
-//                lat: position.coords.latitude,
-//                lng: position.coords.longitude,
-//              });
-//            })
-//            .catch((err) => console.log("err: ", err));
-//        },
-//        (err) => {
-//          alert(err.message);
-//        }
-//      );
-//    } else {
-//      alert("Geolocation is not supported by your browser");
-//    }
-//  };
-
-
+ 
   return (
     <div className="relative">
-      <Marker
-        draggable={true}
-        eventHandlers={eventHandlers}
-        ref={markerRef}
-        position={currentLocation === null ? location : currentLocation}
-      ></Marker>
-      {/* <div className="bg-red-800 absolute bottom-0 w-full h-40" onClick={getMyLocation}>gunakan lokasi saat ini</div> */}
+ 
+      <div
+        onClick={getCurrentLocationAgain}
+        className="absolute z-[99999] bg-red-800 border border-black rounded-lg"
+      >
+        ini current loc
+      </div>
+      {firstData === null ? (
+        <>
+          <Marker
+            draggable={true}
+            eventHandlers={eventHandlers}
+            ref={markerRef}
+            position={currentLocation === null ? location : currentLocation}
+          ></Marker>
+        </>
+      ) : (
+        <>
+          <Marker
+            draggable={true}
+            eventHandlers={eventHandlers}
+            ref={markerRef}
+            position={firstData}
+          ></Marker>
+        </>
+      )}
     </div>
   );
 };
@@ -188,6 +189,7 @@ const CurrentLocation = (props) => {
 const LocationMarker = (props) => {
   const [getData, setData] = useState(null);
   const [dataList, setDataList] = useState([]);
+  const [mode, setMode] = useState("");
   const {
     currentLocation,
     setCurrentLocation,
@@ -201,7 +203,9 @@ const LocationMarker = (props) => {
   const requestOptions = {
     method: "GET",
   };
+ 
 
+  //get data location from geolocation js
    const getMyLocation = () => {
      if (navigator.geolocation) {
        navigator.geolocation.getCurrentPosition(
@@ -238,8 +242,42 @@ const LocationMarker = (props) => {
      }
    };
 
+   const updateNetworkStatus = () => {
+     if (navigator.onLine) {
+       console.log("ini online update network");
+       setMode("online");
+       
+     } else {
+       console.log("ini offline update network");
+       setMode("offline");
+       
+     }
+   };
+
+   useEffect(() => {
+     if (!navigator.onLine) {
+       console.log("offlinee mode");
+      //  updateNetworkStatus();
+       // setMode('offline');
+     } else {
+       console.log("online mode");
+       // setMode('online');
+     }
+
+      console.log(mode, "ini mode di useffect dri update network");
+
+     window.addEventListener("online", updateNetworkStatus, false);
+     window.addEventListener("offline", updateNetworkStatus, false);
+   }, []);
+
+
   return (
     <>
+      {mode === "offline" ? (
+        <div className="rounded-md bg-red-800">you are offline</div>
+      ) : (
+        <div>anda online</div>
+      )}
       <MapContainer center={location} zoom={24} scrollWheelZoom={false}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
