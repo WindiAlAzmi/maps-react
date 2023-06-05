@@ -3,6 +3,8 @@ import { useState } from "react";
 
 import { Helmet } from "react-helmet";
 import { DataService } from "../../../data/service-data";
+import PutToIDBDatabase from "../../../data/location-marker-idb";
+import { useNavigate } from "react-router-dom";
 
 const products = [
   {
@@ -67,84 +69,28 @@ export default function PaymentNMW() {
   const [descCustomer, setDescCustomer] = useState([]);
 
   const itemProduct = DataService();
+  const navigate = useNavigate();
 
 
-    const metaHTML = {
-      title: `pembayaran atas  ${nameCustomer}`,
-      description: `nama barang ${descCustomer?.title}`,
-      image: `${descCustomer?.img}`,
-      url: window.location.href,
-    };
+    // const metaHTML = {
+    //   title: `pembayaran atas  ${nameCustomer}`,
+    //   description: `nama barang ${descCustomer?.title}`,
+    //   image: `${descCustomer?.img}`,
+    //   url: window.location.href,
+    // };
     
 
-    const getDataProduct = (data) => {
+    const getDataProduct = async(data) => {
        console.log(data, 'ini data')
        setDescCustomer(data);
+       const datasUserIDB = await PutToIDBDatabase.setData('url-preview', data);
+       console.log('berhasil', datasUserIDB);
+       navigate(`/paymentNMW/${data.title}`)
     }
 
   
   return (
     <div>
-      {
-        metaHTML.description && metaHTML.image && (
-          <Helmet>
-            <meta httpEquiv="content-type" content="text/html; charset=iso-8859-1"/>
-            <link rel="canonical" href={`${metaHTML.image}`}></link>
-            <meta name="description" content={metaHTML.description} />
-            <meta name="title" content={metaHTML.title} />
-            <title>{metaHTML.title}</title>
-            {/* <meta
-          property="og:title"
-          content={metaHTML.title}
-          data-react-helmet="true"
-        />
-        <meta
-          property="og:description"
-          content={metaHTML.description}
-          data-react-helmet="true"
-        />
-        <meta
-          property="og:image"
-          content={"%PUBLIC_URL%" + metaHTML.image}
-          data-react-helmet="true"
-        />
-        <meta
-          property="og:url"
-          content={metaHTML.url}
-          data-react-helmet="true"
-        /> */}
-          </Helmet>
-        )
-        // <Helmet>
-        //     <title>{metaHTML.title}</title>
-        //     <meta name="title" content={metaHTML.title} data-react-helmet="true" />
-        //     <meta
-        //       name="description"
-        //       content={metaHTML.description}
-        //       data-react-helmet="true"
-        //     />
-        //     <meta
-        //       property="og:title"
-        //       content={metaHTML.title}
-        //       data-react-helmet="true"
-        //     />
-        //     <meta
-        //       property="og:description"
-        //       content={metaHTML.description}
-        //       data-react-helmet="true"
-        //     />
-        //     <meta
-        //       property="og:image"
-        //       content={"%PUBLIC_URL%" + metaHTML.image}
-        //       data-react-helmet="true"
-        //     />
-        //     <meta
-        //       property="og:url"
-        //       content={metaHTML.url}
-        //       data-react-helmet="true"
-        //     />
-        //   </Helmet>
-      }
       <main>
         <div>
           <label
