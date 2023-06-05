@@ -33,6 +33,27 @@ export default function PaymentDetail() {
           <link rel="canonical" href={`${dataIDB.url}`}></link>
           <meta name="description" content={dataIDB.description} />
           <meta name="title" content={dataIDB.title} />
+                  <meta
+              property="og:title"
+              content={dataIDB.title}
+              data-react-helmet="true"
+            />
+        <meta
+              property="og:description"
+              content={dataIDB.description}
+              data-react-helmet="true"
+            />
+           <meta
+              property="og:image"
+              content={"%PUBLIC_URL%" + dataIDB.image}
+              data-react-helmet="true"
+            />
+         <meta
+              property="og:url"
+              content={dataIDB.url}
+              data-react-helmet="true"
+            />
+
           <title>{dataIDB.title}</title>
         </Helmet>
       )}
