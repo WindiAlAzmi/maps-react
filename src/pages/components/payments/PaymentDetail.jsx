@@ -27,32 +27,37 @@ export default function PaymentDetail() {
       {dataIDB?.url && (
         <Helmet>
           <meta
-            httpEquiv="content-type"
-            content="text/html; charset=iso-8859-1"
+            httpEquiv="x-ua-compatible"
+            content="ie=edge"
           />
-          <link rel="canonical" href={`${dataIDB.url}`}></link>
-          <meta name="description" content={dataIDB.description} />
-          <meta name="title" content={dataIDB.title} />
-                  <meta
-              property="og:title"
-              content={dataIDB.title}
-              data-react-helmet="true"
-            />
-        <meta
-              property="og:description"
-              content={dataIDB.description}
-              data-react-helmet="true"
-            />
-           <meta
-              property="og:image"
-              content={"%PUBLIC_URL%" + dataIDB.image}
-              data-react-helmet="true"
-            />
-         <meta
-              property="og:url"
-              content={dataIDB.url}
-              data-react-helmet="true"
-            />
+          <link
+            rel="canonical"
+            href={`${dataIDB.url}`}
+            data-react-helmet="true"
+          />
+          <meta
+            property="og:title"
+            content={dataIDB.title}
+            data-react-helmet="true"
+          />
+          <meta
+            property="og:description"
+            content={dataIDB.description}
+            data-react-helmet="true"
+          />
+          <meta
+            property="og:image"
+            content={
+              "https://stellar-caramel-226f87.netlify.app/img/service" + dataIDB.image
+            }
+        
+            data-react-helmet="true"
+          />
+          <meta
+            property="og:url"
+            content={dataIDB.url}
+            data-react-helmet="true"
+          />
 
           <title>{dataIDB.title}</title>
         </Helmet>
