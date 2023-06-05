@@ -85,16 +85,15 @@ export default function PaymentNMW() {
   
   return (
     <div>
-        {metaHTML.description && metaHTML.image &&
-    <Helmet>
-        <title>{metaHTML.title}</title>
-        <meta name="title" content={metaHTML.title} data-react-helmet="true" />
-        <meta
-          name="description"
-          content={metaHTML.description}
-          data-react-helmet="true"
-        />
-        <meta
+      {
+        metaHTML.description && metaHTML.image && (
+          <Helmet>
+            <meta httpEquiv="content-type" content="text/html; charset=iso-8859-1"/>
+            <link rel="canonical" href={`${metaHTML.image}`}></link>
+            <meta name="description" content={metaHTML.description} />
+            <meta name="title" content={metaHTML.title} />
+            <title>{metaHTML.title}</title>
+            {/* <meta
           property="og:title"
           content={metaHTML.title}
           data-react-helmet="true"
@@ -113,9 +112,39 @@ export default function PaymentNMW() {
           property="og:url"
           content={metaHTML.url}
           data-react-helmet="true"
-        />
-      </Helmet>
-}
+        /> */}
+          </Helmet>
+        )
+        // <Helmet>
+        //     <title>{metaHTML.title}</title>
+        //     <meta name="title" content={metaHTML.title} data-react-helmet="true" />
+        //     <meta
+        //       name="description"
+        //       content={metaHTML.description}
+        //       data-react-helmet="true"
+        //     />
+        //     <meta
+        //       property="og:title"
+        //       content={metaHTML.title}
+        //       data-react-helmet="true"
+        //     />
+        //     <meta
+        //       property="og:description"
+        //       content={metaHTML.description}
+        //       data-react-helmet="true"
+        //     />
+        //     <meta
+        //       property="og:image"
+        //       content={"%PUBLIC_URL%" + metaHTML.image}
+        //       data-react-helmet="true"
+        //     />
+        //     <meta
+        //       property="og:url"
+        //       content={metaHTML.url}
+        //       data-react-helmet="true"
+        //     />
+        //   </Helmet>
+      }
       <main>
         <div>
           <label
@@ -129,18 +158,20 @@ export default function PaymentNMW() {
               type="text"
               name="last-name"
               className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-              onChange={(e)=> setNameCustomer(e.target.value)}
+              onChange={(e) => setNameCustomer(e.target.value)}
             />
           </div>
         </div>
 
         <div>
-            {itemProduct?.map((item, index) => {
-                return <div key={index} onClick={() => getDataProduct(item)}>{item.title}</div>
-            })}
+          {itemProduct?.map((item, index) => {
+            return (
+              <div key={index} onClick={() => getDataProduct(item)}>
+                {item.title}
+              </div>
+            );
+          })}
         </div>
-
-     
       </main>
     </div>
   );
