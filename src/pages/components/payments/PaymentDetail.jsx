@@ -2,16 +2,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import PutToIDBDatabase from "../../../data/location-marker-idb";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 export default function PaymentDetail() {
     const {title} = useParams();
     const [dataIDB, setDataIDB] = useState({title:'', description:'',image:'', url:''});
     console.log('title');
-
     
-    
-
     useEffect(() => {
         const fetchIDBDetail = async() => {
             const getUrlPaymentDetail = await PutToIDBDatabase.getData('url-preview');
@@ -26,10 +23,9 @@ export default function PaymentDetail() {
     <div>
       {dataIDB?.url && (
         <Helmet>
-          <meta
-            httpEquiv="x-ua-compatible"
-            content="ie=edge"
-          />
+          <title>{dataIDB.title}</title>
+          <meta name="description" content="detail data" />
+          <meta httpEquiv="x-ua-compatible" content="ie=edge" />
           <link
             rel="canonical"
             href={`${dataIDB.url}`}
@@ -40,6 +36,7 @@ export default function PaymentDetail() {
             content={dataIDB.title}
             data-react-helmet="true"
           />
+          <meta property="og:type" content="website" />
           <meta
             property="og:description"
             content={dataIDB.description}
@@ -48,9 +45,8 @@ export default function PaymentDetail() {
           <meta
             property="og:image"
             content={
-              "https://stellar-caramel-226f87.netlify.app/img/service" + dataIDB.image
+              "https://stellar-caramel-226f87.netlify.app/" + dataIDB.image
             }
-        
             data-react-helmet="true"
           />
           <meta
@@ -58,8 +54,7 @@ export default function PaymentDetail() {
             content={dataIDB.url}
             data-react-helmet="true"
           />
-
-          <title>{dataIDB.title}</title>
+        
         </Helmet>
       )}
 

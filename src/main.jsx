@@ -7,11 +7,13 @@ import { store } from './store/store.js'
 import { fetchData } from './redux/getAllProvinceSlice.js'
 import { Provider } from 'react-redux'
 import "./util/i18n.js";
+import { HelmetProvider } from 'react-helmet-async'
 
 
 store.dispatch(fetchData());
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    <HelmetProvider>
       <Provider store={store}>
         <BrowserRouter>
           <Routes>
@@ -19,5 +21,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           </Routes>
         </BrowserRouter>
       </Provider>
+    </HelmetProvider>
   </React.StrictMode>
 );
