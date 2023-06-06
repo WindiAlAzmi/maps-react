@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet-async";
 export default function PaymentDetail() {
     const {title} = useParams();
     const [dataIDB, setDataIDB] = useState({title:'', description:'',image:'', url:''});
-    console.log('title');
+    console.log('iamge', dataIDB.image);
     
     useEffect(() => {
         const fetchIDBDetail = async() => {
@@ -18,6 +18,7 @@ export default function PaymentDetail() {
         }
         fetchIDBDetail();
     },[])
+
 
   return (
     <div>
@@ -45,7 +46,7 @@ export default function PaymentDetail() {
           <meta
             property="og:image"
             content={
-              "https://stellar-caramel-226f87.netlify.app/" + dataIDB.image
+              "/assets" + dataIDB.image
             }
             data-react-helmet="true"
           />

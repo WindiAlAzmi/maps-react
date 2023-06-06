@@ -1,1 +1,2 @@
 https://stellar-caramel-226f87.netlify.app/
+https://stellar-caramel-226f87.netlify.app/paymentNMW/
