@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {  useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { dataStateCity, dataStateKecamatan, dataStateProvinces, fetchDataKecamatan, fetchDataKota, removeAllStateRegion } from "../redux/getAllProvinceSlice";

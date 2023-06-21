@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet";
 import { DataService } from "../../../data/service-data";
 import PutToIDBDatabase from "../../../data/location-marker-idb";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const products = [
   {
@@ -67,9 +68,11 @@ export default function PaymentNMW() {
 
   const [nameCustomer, setNameCustomer] = useState("");
   const [descCustomer, setDescCustomer] = useState([]);
+  const [dataServer, setDataServer] = useState("");
 
   const itemProduct = DataService();
   const navigate = useNavigate();
+  const urlWithAxios = "/paymentNMW/:slug"
 
 
     // const metaHTML = {
@@ -78,14 +81,25 @@ export default function PaymentNMW() {
     //   image: `${descCustomer?.img}`,
     //   url: window.location.href,
     // };
+
+    // const getDataFromServer = (data) =>{
+    //     console.log(data, 'ini data untuk title server')
+    //     axios
+    //      .get(`/paymentNMW/${data.title}`)
+    //      .then((res) => setDataServer(res.data))
+    //      .catch((err) => {
+    //         console.error(err);
+    //      })
+    
+    // }
     
 
     const getDataProduct = async(data) => {
-       console.log(data, 'ini data')
+    
        setDescCustomer(data);
        const datasUserIDB = await PutToIDBDatabase.setData('url-preview', data);
-       console.log('berhasil', datasUserIDB);
-       navigate(`/paymentNMW/${data.title}`)
+    
+      
     }
 
   

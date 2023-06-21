@@ -24,6 +24,8 @@ import SendEmail from './pages/components/sendData/SendEmail'
 import ZoomPinch from './pages/components/zoomInZoomOut/ZoomPinch'
 import PaymentNMW from './pages/components/payments/PaymentNMW'
 import PaymentDetail from './pages/components/payments/PaymentDetail'
+import Comments from './pages/components/comments/comments'
+import ShareData from './pages/components/share/ShareData'
 
 
 function App() {
@@ -52,13 +54,13 @@ function App() {
         <Route path="/zoomCard" element={<ZoomCard />} />
         <Route path="/zoomPinch" element={<ZoomPinch />} />
         <Route path="/sendEmail" element={<SendEmail />} />
-        
+        <Route path="/shareData" element={<ShareData/>} />
+        <Route path="/comments" element={<Comments />} />
 
-            <Route path="paymentNMW">
-            <Route index element={<PaymentNMW/>}  />
-            <Route path=":title" element={<PaymentDetail/>} />
-          </Route>
-
+        <Route path="paymentNMW">
+          <Route index element={<PaymentNMW />} />
+          <Route path=":title" element={<PaymentDetail />} />
+        </Route>
       </Routes>
     </>
   );
