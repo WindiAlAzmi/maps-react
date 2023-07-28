@@ -98,7 +98,7 @@ export default function PaymentNMW() {
     
        setDescCustomer(data);
        const datasUserIDB = await PutToIDBDatabase.setData('url-preview', data);
-    
+      navigate(`/paymentNMW/${data.title}`)
       
     }
 
